@@ -23,24 +23,10 @@ public class CredRoute extends RouteBuilder {
 
         from("direct:cred-create")
                 .log("[POST /cred/create] Request Body: ${body}")
-                //.process("userCreateProcessor")
+                .process("tokenVerifier")
+                .log("[POST /cred/create] Token verified.")
+                //.process("credCreateProcessor")
                 .log("[POST /cred/create] Response Body: ${body}");
-
-
-        from("direct:token-verify")
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws JWTCreationException {
-                        /*
-                        Body body = exchange.getIn().getBody(Body.class);
-                        String token = body.getToken();
-                        DecodedJWT jwt = tokenManager.verify(token);
-                        exchange.getIn().setBody(jwt);
-                        System.out.println(jwt.getIssuedAt());
-                        */
-                    }
-                })
-                .log("TOKEN VERIFIED.");
     }
 
 }

@@ -6,13 +6,16 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.vertx.core.cli.annotations.Name;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import java.util.Map;
 
 @Singleton
+@Named("tokenManager")
 public class TokenManager {
 
     Algorithm algorithm;
